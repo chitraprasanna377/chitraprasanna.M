@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Fake News Detection & Sentiment Analysis - Python Flask</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&display=swap">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="badge">College MCA / BCA Capstone Project</div>
+      <h1>AI-Based Fake News Detection &amp; News Sentiment Analysis</h1>
+      <p class="subtitle">An intelligent NLP system classifying article authenticity, emotional polarity, and structural credibility indicators.</p>
+    </header>
+
+    <main class="main-card">
+      <div class="tabs">
+        <button id="tab-text-btn" class="tab-btn active" onclick="switchInput('text')">Paste News Article</button>
+        <button id="tab-url-btn" class="tab-btn" onclick="switchInput('url')">Enter Article URL</button>
+      </div>
+
+      <div class="input-section">
+        <div id="text-input-group">
+          <label for="news-text">News Article Text:</label>
+          <textarea id="news-text" placeholder="Paste full article headline and body here..." rows="7"></textarea>
+        </div>
+
+        <div id="url-input-group" style="display: none;">
+          <label for="news-url">Article Web URL:</label>
+          <input type="url" id="news-url" placeholder="https://www.reuters.com/article/...">
+        </div>
+
+        <div class="presets">
+          <span>Try Samples:</span>
+          <button type="button" class="preset-btn" onclick="loadSample('real')">Real News Sample</button>
+          <button type="button" class="preset-btn" onclick="loadSample('fake')">Fake News Sample</button>
+        </div>
+
+        <div class="btn-group">
+          <button id="analyze-btn" class="btn primary-btn" onclick="submitAnalysis()">Analyze News</button>
+          <button id="clear-btn" class="btn secondary-btn" onclick="clearInputs()">Clear</button>
+        </div>
+      </div>
+
+      <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Running NLP Preprocessing &amp; AI Evaluation Pipeline...</p>
+      </div>
+
+      <div id="results" class="results-dashboard" style="display: none;">
+        <div class="dashboard-grid">
+          <div class="result-card classification-card">
+            <h3>1. News Classification</h3>
+            <div id="classification-badge" class="badge-large">Real News</div>
+            <div class="metric">Confidence: <strong id="confidence-val">88%</strong></div>
+          </div>
+
+          <div class="result-card sentiment-card">
+            <h3>2. Sentiment Analysis</h3>
+            <div id="sentiment-badge" class="badge-large">Neutral</div>
+            <div class="metric">Polarity Score: <strong id="polarity-val">0.05</strong></div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <h3>3. Article Summary</h3>
+          <p id="summary-val" class="summary-text"></p>
+        </div>
+
+        <div class="result-card">
+          <h3>4. Salient Keywords</h3>
+          <div id="keywords-container" class="tags-container"></div>
+        </div>
+
+        <div class="result-card">
+          <h3>5. Analysis Explanation</h3>
+          <p id="explanation-val"></p>
+        </div>
+
+        <div class="result-card">
+          <h3>6. Source Information</h3>
+          <p><strong>Domain / Source:</strong> <span id="source-domain">Manual Text Input</span></p>
+        </div>
+
+        <div class="verification-banner">
+          <p><strong>Verification Notice:</strong> AI-generated analysis should not be treated as proof that a news article is true or false. Verify important information using multiple trusted and independent sources.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/static/script.js"></script>
+</body>
+</html>
